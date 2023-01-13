@@ -1,15 +1,9 @@
 #!/bin/bash
 
-# Declare variables
-SETTINGS_ENV=${SETTINGS_ENV:-/settings/environment}
-SHIP_CONTROL_ENV=${SHIP_CONTROL_ENV:/ship/control/environment}
-PANIC_ENV=${PANIC_ENV:/panic/environment}
-FLAG_ENV=${FLAG_ENV:/flag/environment}
-
 # Function for SETTINGS
 function settings() {
     echo "Changing settings for the ship."
-    cat /config/ship-settings.cfg
+    cat ./config/ship-settings.cfg
     echo "Settings successfully changed."
 }
 
@@ -32,7 +26,7 @@ function panic() {
 # Function for FLAG
 function flag() {
     echo "Raising the flag."
-    cat /ship/control/flag
+    cat ./ship/control/flag
     echo "Flag raised."
 }
 
@@ -47,22 +41,18 @@ while true; do
   case $selection in
     0)
       echo "Accessing SETTINGS..."
-      source $SETTINGS_ENV
       settings
       ;;
     1)
       echo "Accessing SHIP CONTROL SYSTEMS..."
-      source $SHIP_CONTROL_ENV
       ship_control
       ;;
     2)
       echo "Initiating PANIC..."
-      source $PANIC_ENV
       panic
       ;;
     3)
       echo "Accessing FLAG..."
-      source $FLAG_ENV
       flag
       ;;
     *)
